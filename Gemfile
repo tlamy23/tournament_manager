@@ -18,9 +18,18 @@ group :assets do
   # gem 'therubyracer', :platforms => :ruby
 
   gem 'uglifier', '>= 1.0.3'
+  gem 'twitter-bootstrap-rails'
 end
 
 gem 'jquery-rails'
+gem 'haml-rails'
+
+
+gem 'rspec-rails',  :group => [ :test, :development ]
+group :test do
+  gem 'factory_girl_rails', '1.7.0'
+end
+
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
