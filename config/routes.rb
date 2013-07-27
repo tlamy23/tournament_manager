@@ -4,6 +4,10 @@ TournamentManager::Application.routes.draw do
 
   resources :teams
 
+  get 'standings' => 'dashboard#standings'
+
+  root :to => 'dashboard#standings'
+
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
