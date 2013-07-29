@@ -1,0 +1,23 @@
+- model_class = Schedule
+.pull-right
+  = link_to t('.new', :default => t("helpers.links.new")), new_schedule_path, :class => 'btn btn-primary'
+
+.page-header
+  %h1=t '.title', :default => model_class.model_name.human.pluralize.titleize
+- if @schedules.present?
+  %table.table.table-striped
+    %thead
+      %tr
+        %th= model_class.human_attribute_name(:description)
+        %th= model_class.human_attribute_name(:date)
+        %th=t '.actions', :default => t("helpers.actions")
+    %tbody
+      - @schedules.each do |schedule|
+        %tr
+          %td= schedule.description
+          %td= schedule.date
+          %td
+            = link_to t('.edit', :default => t("helpers.links.edit")), edit_schedule_path(schedule), :class => 'btn btn-mini'
+            = link_to t('.destroy', :default => t("helpers.links.destroy")), schedule_path(schedule), :method => :delete, :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-mini btn-danger'
+- else
+  %p No schedules to display
