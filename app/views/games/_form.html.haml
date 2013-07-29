@@ -2,7 +2,7 @@
   .control-group
     = f.label :schedule_id, :class => 'control-label'
     .controls
-      = f.number_field :schedule_id, :class => 'number_field'
+      = f.select :schedule_id, Schedule.all.collect {|u| [u.description, u.id]}, :class => 'number_field'
   .form-actions
     = f.submit nil, :class => 'btn btn-primary'
     = link_to t('.cancel', :default => t("helpers.links.cancel")), games_path, :class => 'btn'

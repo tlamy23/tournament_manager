@@ -14,7 +14,7 @@
     %tbody
       - @schedules.each do |schedule|
         %tr
-          %td= schedule.description
+          %td= link_to schedule.description, schedule_path(schedule)
           %td= schedule.date
           %td
             = link_to t('.edit', :default => t("helpers.links.edit")), edit_schedule_path(schedule), :class => 'btn btn-mini'
