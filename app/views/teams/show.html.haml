@@ -1,11 +1,45 @@
 - model_class = Team
 .page-header
-  %h1=t '.title', :default => model_class.model_name.human.titleize
+  %h1= @team.name
 
-%p
-  %strong= model_class.human_attribute_name(:name) + ':'
-  %br
-  = @team.name
+.row-fluid
+  .span6
+    %table.table.table-bordered
+      %thead
+        %tr
+          %th Name
+          %th Nickname
+          %th Avg points
+          %th Avg fouls
+      %tbody
+        - @team.players.each do |player|
+          %tr
+            %td= link_to player.first_name, player_path(player)
+            %td= player.nickname
+            %td= 0
+            %td= 0
+
+.page-header
+  %h3 Games
+
+.row-fluid
+  .span6
+    - if @team.team_stats.present?
+      %table.table.table-bordered
+        %thead
+          %tr
+            %th Description
+            %th Schedule
+            %th Result
+        %tbody
+          - @team.team_stats.each do |stats|
+            - game = stats.game
+            %tr
+              %td= link_to "#{game.team_stats.first.team.name} vs #{game.team_stats.last.team.name}", game_path(game)
+              %td= game.schedule.present? ? game.schedule.description : "Unscheduled"
+              %td
+    - else
+      %p No games to display
 
 
 .form-actions

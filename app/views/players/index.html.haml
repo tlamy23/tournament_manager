@@ -7,22 +7,15 @@
   %table.table.table-striped
     %thead
       %tr
-        %th= model_class.human_attribute_name(:first_name)
-        %th= model_class.human_attribute_name(:last_name)
-        %th= model_class.human_attribute_name(:nickname)
-        %th= model_class.human_attribute_name(:height)
-        %th= model_class.human_attribute_name(:weight)
-        %th= Team
-        %th=t '.actions', :default => t("helpers.actions")
+        %th Name
+        %th Nickname
+        %th Team
+        %th Actions
     %tbody
       - @players.each do |player|
         %tr
-          %td= link_to player.first_name, player_path(player)
-          %td= player.first_name
-          %td= player.last_name
+          %td= link_to "#{player.first_name} #{player.last_name}", player_path(player)
           %td= player.nickname
-          %td= player.height
-          %td= player.weight
           %td= player.team.name
           %td
             = link_to t('.edit', :default => t("helpers.links.edit")), edit_player_path(player), :class => 'btn btn-mini'

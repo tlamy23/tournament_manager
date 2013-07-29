@@ -1,31 +1,41 @@
 - model_class = Player
 .page-header
   %h1=t '.title', :default => model_class.model_name.human.titleize
+.row-fluid
+  .span6
+    %p.lead
+      %strong= model_class.human_attribute_name(:first_name) + ':'
+      = @player.first_name
+    %p.lead
+      %strong= model_class.human_attribute_name(:last_name) + ':'
+      = @player.last_name
+    %p.lead
+      %strong= model_class.human_attribute_name(:nickname) + ':'
+      = @player.nickname
+    %p.lead
+      %strong= model_class.human_attribute_name(:height) + ':'
+      = @player.height
+    %p.lead
+      %strong= model_class.human_attribute_name(:weight) + ':'
+      = @player.weight
+    %p.lead
+      %strong= model_class.human_attribute_name(:team_id) + ':'
+      = @player.team.name
 
-%p
-  %strong= model_class.human_attribute_name(:first_name) + ':'
-  %br
-  = @player.first_name
-%p
-  %strong= model_class.human_attribute_name(:last_name) + ':'
-  %br
-  = @player.last_name
-%p
-  %strong= model_class.human_attribute_name(:nickname) + ':'
-  %br
-  = @player.nickname
-%p
-  %strong= model_class.human_attribute_name(:height) + ':'
-  %br
-  = @player.height
-%p
-  %strong= model_class.human_attribute_name(:weight) + ':'
-  %br
-  = @player.weight
-%p
-  %strong= model_class.human_attribute_name(:team_id) + ':'
-  %br
-  = @player.team_id
+  .span6
+    %table.table.table-bordered
+      %thead
+        %tr
+          %th Against
+          %th Points
+          %th Fouls
+      %tbody
+        - @player.player_stats.each do |stat|
+        - opponent = (stat.team_stat.game.team_stats - [stat.team_stat]).first
+          %tr
+            %td= link_to opponent.team.name, team_path(opponent.team_id)
+            %td= stat.points
+            %td= stat.fouls
 
 .form-actions
   = link_to t('.back', :default => t("helpers.links.back")), players_path, :class => 'btn'
