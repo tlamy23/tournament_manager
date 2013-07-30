@@ -24,12 +24,11 @@ class Api::GamesController < ActionController::Base
         :game => { :id => game.id, :team_stats => team_stats }
       }
     end
-    list.to_json
+    list
   end
 
   def game_custom_json(game)
     team_stats = []
-    puts "#{game} game <<<<<<<<<<"
     game.team_stats.map do |team_stat|
       player_stats = []
       team_stat.player_stats.each do |player_stat|
@@ -38,6 +37,7 @@ class Api::GamesController < ActionController::Base
       team_stats << {:id => team_stat.id, :team => team_stat.team.name, :score => team_stat.score, :result => team_stat.result, :player_stats => player_stats}
     end
     list = {:game => { :id => game.id, :team_stats => team_stats }}
-    list.to_json
+    puts "#{list.class}"
+    list
   end
 end
