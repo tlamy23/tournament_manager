@@ -1,4 +1,6 @@
 class ActionsHelperController < ApplicationController
+  before_filter :authenticate_user!
+
   def generate_games
     Game.destroy_all
     TeamStat.destroy_all

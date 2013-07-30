@@ -1,30 +1,34 @@
-- model_class = Schedule
-.page-header
-  %h1=t '.title', :default => model_class.model_name.human.titleize
+.row
+  - model_class = Schedule
+  .page-header
+    %h1=t '.title', :default => model_class.model_name.human.titleize
 
-%p.lead
-  = "#{@schedule.description} (#{@schedule.date})"
+  %p.lead
+    = "#{@schedule.description} (#{@schedule.date})"
 
-- if @schedule.games.present?
-  %table.table.table-striped
-    %thead
-      %tr
-        %th Description
-        %th Schedule
-        %th=t '.actions', :default => t("helpers.actions")
-    %tbody
-      - @schedule.games.each do |game|
-        - game.team_stats
-        %tr
-          %td= link_to "#{game.team_stats.first.team.name} vs #{game.team_stats.last.team.name}", game_path(game)
-          %td= game.schedule.present? ? game.schedule.description : "Unscheduled"
-          %td
-            = link_to t('.edit', :default => t("helpers.links.edit")), edit_game_path(game), :class => 'btn btn-mini'
-            = link_to t('.destroy', :default => t("helpers.links.destroy")), game_path(game), :method => :delete, :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-mini btn-danger'
-- else
-  %p No scheduled games
+  - if @schedule.games.present?
+    .span6
+      %table.table.table-bordered
+        %thead
+          %tr
+            %th Description
 
-.form-actions
-  = link_to t('.back', :default => t("helpers.links.back")), schedules_path, :class => 'btn'
-  = link_to t('.edit', :default => t("helpers.links.edit")), edit_schedule_path(@schedule), :class => 'btn'
-  = link_to t('.destroy', :default => t("helpers.links.destroy")), schedule_path(@schedule), :method => "delete", :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-danger'
+            - if user_signed_in?
+              %th=t '.actions', :default => t("helpers.actions")
+        %tbody
+          - @schedule.games.each do |game|
+            - game.team_stats
+            %tr
+              %td= link_to "#{game.team_stats.first.team.name} vs #{game.team_stats.last.team.name}", game_path(game)
+              - if user_signed_in?
+                %td
+                  = link_to t('.edit', :default => t("helpers.links.edit")), edit_game_path(game), :class => 'btn btn-mini'
+                  = link_to t('.destroy', :default => t("helpers.links.destroy")), game_path(game), :method => :delete, :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-mini btn-danger'
+  - else
+    %p No scheduled games
+.row
+  .form-actions
+    = link_to t('.back', :default => t("helpers.links.back")), schedules_path, :class => 'btn'
+    - if user_signed_in?
+      = link_to t('.edit', :default => t("helpers.links.edit")), edit_schedule_path(@schedule), :class => 'btn'
+      = link_to t('.destroy', :default => t("helpers.links.destroy")), schedule_path(@schedule), :method => "delete", :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-danger'
