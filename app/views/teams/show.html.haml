@@ -32,7 +32,7 @@
             %th Schedule
             %th Result
         %tbody
-          - @team.team_stats.each do |stats|
+          - @team.team_stats.joins(:game).order(:schedule_id).each do |stats|
             - game = stats.game
             %tr
               %td= link_to "#{game.team_stats.first.team.name} vs #{game.team_stats.last.team.name}", game_path(game)
