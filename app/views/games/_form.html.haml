@@ -3,6 +3,30 @@
     = f.label :schedule_id, :class => 'control-label'
     .controls
       = f.select :schedule_id, Schedule.all.collect {|u| [u.description, u.id]}, :class => 'number_field'
+
+  = f.fields_for :team_stats do |team|
+    %h3= team.object.team.name
+
+    .row-fluid
+      .span4
+        %table.table.table-bordered
+          %tr
+            %th
+            %th Ponts
+            %th Fouls
+          = team.fields_for :player_stats do |player|
+            - p = player.object.player
+            %tr
+              %td
+                %h5= "#{p.first_name} #{p.last_name}"
+              %td
+                = player.text_field :points, :class => 'span6'
+              %td
+                = player.text_field :fouls, :class => 'span6'
+
+
+
+
   .form-actions
     = f.submit nil, :class => 'btn btn-primary'
     = link_to t('.cancel', :default => t("helpers.links.cancel")), games_path, :class => 'btn'

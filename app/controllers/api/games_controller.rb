@@ -11,6 +11,18 @@ class Api::GamesController < ActionController::Base
     respond_with json: game_custom_json(@game)
   end
 
+  def update
+    puts "#{params[:team_stats].first} >>>>>>>>>>>>>>>>>"
+
+    team_stats = params[:team_stats]
+    team_stats.each do |team_stat|
+      team = TeamStat.find team_stat["id"]
+      team.update_attributes team_stat.except("id", "team_name")
+    end
+
+    render json: { status: "Success"}
+  end
+
 
   private
   def index_custom_json(value)

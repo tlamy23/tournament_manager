@@ -16,7 +16,7 @@ TournamentManager::Application.routes.draw do
 
   namespace :api do
     resources :schedules, :only => :index
-    resources :games, :only => [:index, :show]
+    resources :games, :only => [:index, :show, :update]
   end
 
 end

@@ -1,11 +1,7 @@
 class Game < ActiveRecord::Base
-  attr_accessible :week, :schedule_id
+  attr_accessible :week, :schedule_id, :team_stats_attributes
   has_many :team_stats, :dependent => :destroy
   belongs_to :schedule
 
-  # def as_json options={}
-  #   attrs = [:id ]
-  #   team_attrs = [ :score, :result, :team_id ]
-  #   super options.merge(:only => attrs, :include => [ :team_stats => { :only => team_attrs } ] )
-  # end
+  accepts_nested_attributes_for :team_stats
 end

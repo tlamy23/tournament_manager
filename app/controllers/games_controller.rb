@@ -1,5 +1,6 @@
 class GamesController < ApplicationController
-  before_filter :authenticate_user!, :except => [:index, :show, :edit, :update]
+  before_filter :authenticate_user!, :except => [:index, :show]
+  before_filter :load_results
   # GET /games
   # GET /games.json
   def index
@@ -24,7 +25,7 @@ class GamesController < ApplicationController
 
   # GET /games/1/edit
   def edit
-    @game = Game.find(params[:id])
+    @game = Game.includes(:team_stats).find(params[:id])
   end
 
   # PUT /games/1
@@ -53,5 +54,10 @@ class GamesController < ApplicationController
       format.html { redirect_to games_url }
       format.json { head :no_content }
     end
+  end
+
+  private
+  def load_results
+    @results = %w(Won Lost)
   end
 end
