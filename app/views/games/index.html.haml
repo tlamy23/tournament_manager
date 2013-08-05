@@ -16,9 +16,9 @@
         %tr
           %td= link_to "#{game.team_stats.first.team.name} vs #{game.team_stats.last.team.name}", game_path(game)
           %td= game.schedule.present? ? game.schedule.description : "Unscheduled"
-
-          %td
-            = link_to t('.edit', :default => t("helpers.links.edit")), edit_game_path(game), :class => 'btn btn-mini'
-            / = link_to t('.destroy', :default => t("helpers.links.destroy")), game_path(game), :method => :delete, :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-mini btn-danger'
+          - if user_signed_in?
+            %td
+              = link_to t('.edit', :default => t("helpers.links.edit")), edit_game_path(game), :class => 'btn btn-mini'
+              / = link_to t('.destroy', :default => t("helpers.links.destroy")), game_path(game), :method => :delete, :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-mini btn-danger'
 - else
   %p No games to display
