@@ -1,3 +1,22 @@
 .hero-unit
   %h1 3 ON 3 Tournament 2013
   %p Only one team will become legend.
+
+.row-fluid
+  .span6
+    %p.lead= "Heaviest team"
+    %h2= "#{@teams_weight.first.name}"
+  .span6
+    %p.lead= "Lightest team"
+    %h2= "#{@teams_weight.last.name}"
+
+%br
+%br
+
+.row-fluid
+  .span6
+    %p.lead= "Tallest team"
+    %h2= "#{@teams_height.first.name}"
+  .span6
+    %p.lead= "Smallest team"
+    %h2= "#{@teams_height.last.name}"
