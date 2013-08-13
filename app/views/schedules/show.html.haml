@@ -17,9 +17,10 @@
               %th=t '.actions', :default => t("helpers.actions")
         %tbody
           - @schedule.games.each do |game|
-            - game.team_stats
+            - team_stats1 = game.team_stats.first
+            - team_stats2 = game.team_stats.last
             %tr
-              %td= link_to "#{game.team_stats.first.team.name} vs #{game.team_stats.last.team.name}", game_path(game)
+              %td= link_to "#{team_stats1.score.to_i} - #{team_stats1.team.name} VS #{team_stats2.team.name} - #{team_stats2.score.to_i}", game_path(game)
               - if user_signed_in?
                 %td
                   = link_to t('.edit', :default => t("helpers.links.edit")), edit_game_path(game), :class => 'btn btn-mini'
