@@ -15,6 +15,9 @@ class PlayersController < ApplicationController
   # GET /players/1.json
   def show
     @player = Player.find(params[:id])
+    @total_stats = PlayerStat.select('SUM(player_stats.points) as points, SUM(player_stats.fouls) as fouls')
+                              .where('player_stats.player_id = ?', @player.id)
+                              .group('player_stats.player_id').first
 
     respond_to do |format|
       format.html # show.html.erb

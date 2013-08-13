@@ -23,6 +23,14 @@
       = @player.team.name
 
   .span6
+    %p.lead
+      Total points:
+      %strong= @total_stats.points
+
+    %p.lead
+      Total fouls:
+      %strong= @total_stats.fouls
+
     %table.table.table-bordered
       %thead
         %tr
