@@ -8,6 +8,9 @@
   = @game.schedule.present? ? "#{@game.schedule.description} (#{@game.schedule.date})" : "Unscheduled"
 .row-fluid
   .span6
+    %h3
+      = team_stat1.team.name
+      = team_stat1.score
     %table.table.table-bordered
       %thead
         %tr
@@ -21,6 +24,9 @@
             %td= player_stat.points
             %td= player_stat.fouls
   .span6
+    %h3
+      = team_stat2.team.name
+      = team_stat2.score
     %table.table.table-bordered
       %thead
         %tr
