@@ -29,7 +29,7 @@ class Api::GamesController < ActionController::Base
     list = value.map do |game|
       team_stats = []
       game.team_stats.each do |stat|
-        team_stats << {:id => stat.id, :team_id => stat.team_id, :team_name => stat.team.name}
+        team_stats << {:id => stat.id, :team_id => stat.team_id, :team_name => stat.team.name, :score => stat.score}
       end
 
       {
