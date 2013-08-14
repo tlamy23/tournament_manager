@@ -14,7 +14,7 @@
       - @games.each do |game|
         - game.team_stats
         %tr
-          %td= link_to "#{game.team_stats.first.team.name} vs #{game.team_stats.last.team.name}", game_path(game)
+          %td= link_to "#{game.team_stats[0].team.name} vs #{game.team_stats[1].team.name}", game_path(game)
           %td= game.schedule.present? ? game.schedule.description : "Unscheduled"
           - if user_signed_in?
             %td

@@ -8,8 +8,8 @@ class Game < ActiveRecord::Base
 
   private
   def set_game_winner
-    team_a = self.team_stats.first
-    team_b = self.team_stats.last
+    team_a = self.team_stats[0]
+    team_b = self.team_stats[1]
 
     if team_a.score > team_b.score
       team_a.result = 'Won'

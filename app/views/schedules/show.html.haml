@@ -17,8 +17,9 @@
               %th=t '.actions', :default => t("helpers.actions")
         %tbody
           - @schedule.games.each do |game|
-            - team_stats1 = game.team_stats.first
-            - team_stats2 = game.team_stats.last
+            - team_stats1 = game.team_stats[0]
+            - team_stats2 = game.team_stats[1]
+
             %tr
               %td= link_to "#{team_stats1.score.to_i} - #{team_stats1.team.name} VS #{team_stats2.team.name} - #{team_stats2.score.to_i}", game_path(game)
               - if user_signed_in?

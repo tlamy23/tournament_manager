@@ -34,7 +34,7 @@ class ActionsHelperController < ApplicationController
     exists = false
     Game.all.each do |game|
       existing_game = game.team_stats.map(&:team_id)
-      if existing_game.include?(teams.first) && existing_game.include?(teams.last)
+      if existing_game.include?(teams[0]) && existing_game.include?(teams.last)
         exists = true
       end
     end

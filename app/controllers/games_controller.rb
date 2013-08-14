@@ -16,6 +16,8 @@ class GamesController < ApplicationController
   # GET /games/1.json
   def show
     @game = Game.find(params[:id])
+    @team_stat1 = @game.team_stats[0]
+    @team_stat2 = @game.team_stats[1]
 
     respond_to do |format|
       format.html # show.html.erb

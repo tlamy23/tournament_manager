@@ -12,8 +12,6 @@ class Api::GamesController < ActionController::Base
   end
 
   def update
-    puts "#{params[:team_stats].first} >>>>>>>>>>>>>>>>>"
-
     team_stats = params[:team_stats]
     team_stats.each do |team_stat|
       team = TeamStat.find team_stat["id"]

@@ -1,6 +1,6 @@
 - model_class = Game
-- team_stat1 = @game.team_stats.first
-- team_stat2 = @game.team_stats.last
+- team_stat1 = @game.team_stats[0]
+- team_stat2 = @game.team_stats[1]
 .page-header
   %h1= "#{team_stat1.team.name} vs #{team_stat2.team.name}"
 = render :partial => "form"
