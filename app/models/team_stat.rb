@@ -1,5 +1,5 @@
 class TeamStat < ActiveRecord::Base
-  attr_accessible :score, :result, :player_stats_attributes, :team
+  attr_accessible :score, :result, :player_stats_attributes, :team, :player_stats
   belongs_to :game
   belongs_to :team
   has_many :player_stats, :dependent => :destroy
@@ -12,7 +12,7 @@ class TeamStat < ActiveRecord::Base
   def set_team_data
     puts "entre team_stats"
     team_score = 0
-    self.player_stats.each { |player| team_score += player.points }
+    self.player_stats.each { |player| team_score += (player.points.present? ? player.points : 0) }
     self.score = team_score
   end
   # def team_score

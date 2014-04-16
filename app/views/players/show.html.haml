@@ -25,11 +25,11 @@
   .span6
     %p.lead
       Total points:
-      %strong= @total_stats.points
+      %strong= @total_stats.points if @total_stats.present?
 
     %p.lead
       Total fouls:
-      %strong= @total_stats.fouls
+      %strong= @total_stats.fouls if @total_stats.present?
 
     %table.table.table-bordered
       %thead

@@ -3,11 +3,11 @@ class PlayersController < ApplicationController
   # GET /players
   # GET /players.json
   def index
-    @players = PlayerStat.all :select => 'player_stats.player_id as id, players.first_name, players.nickname, SUM(player_stats.points) as points_sum, SUM(player_stats.fouls) as fouls_sum',
-                             :joins => :player,
-                             :group => 'player_stats.player_id, players.first_name, players.nickname',
+    #@players = Player.all :select => 'player_stats.player_id as id, players.first_name, players.nickname, SUM(player_stats.points) as points_sum, SUM(player_stats.fouls) as fouls_sum',
+    @players = Player.all :select => 'players.id as id, players.first_name, players.nickname, SUM(player_stats.points) as points_sum, SUM(player_stats.fouls) as fouls_sum',
+                             :joins => 'full outer join player_stats on players.id=player_stats.player_id',
+                             :group => 'players.id, players.first_name, players.nickname',
                              :order => 'points_sum DESC'
-
 
     respond_to do |format|
       format.html # index.html.erb
