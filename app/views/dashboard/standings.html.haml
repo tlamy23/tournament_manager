@@ -5,10 +5,10 @@
 .row-fluid
   .span6
     %p.lead= "Heaviest team"
-    %h2= "#{@teams_weight.first.name}"
+    %h2= "#{@teams_weight.first.name}"if @teams_weight.present?
   .span6
     %p.lead= "Lightest team"
-    %h2= "#{@teams_weight.last.name}"
+    %h2= "#{@teams_weight.last.name}"if @teams_weight.present?
 
 %br
 %br
@@ -16,7 +16,7 @@
 .row-fluid
   .span6
     %p.lead= "Tallest team"
-    %h2= "#{@teams_height.first.name}"
+    %h2= "#{@teams_height.first.name}"if @teams_height.present?
   .span6
     %p.lead= "Smallest team"
-    %h2= "#{@teams_height.last.name}"
+    %h2= "#{@teams_height.last.name}"if @teams_height.present?
