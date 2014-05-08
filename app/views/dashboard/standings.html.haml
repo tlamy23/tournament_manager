@@ -20,3 +20,27 @@
   .span6
     %p.lead= "Smallest team"
     %h2= "#{@teams_height.last.name}"if @teams_height.present?
+
+.row-fluid
+  .span12
+    %p.lead= "Stats"
+    %table{border: 2}
+      %tr
+        %td{align: 'center'}
+          %h5= "Team"
+        %td{align: 'center'}
+          %h5= "Won"
+        %td{align: 'center'}
+          %h5= "Lost"
+        %td{align: 'center'}
+          %h5= "Played"
+      - @stats.each do |stat|
+        %tr
+          %td{align: 'center'}
+            %h4= stat.name
+          %td{align: 'center'}
+            = stat.won
+          %td{align: 'center'}
+            = stat.lost
+          %td{align: 'center'}
+            = stat.total
