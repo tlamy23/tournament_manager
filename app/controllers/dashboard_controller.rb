@@ -1,14 +1,17 @@
 class DashboardController < ApplicationController
   def standings
-    @teams_weight = Team.all :select => 'teams.name, SUM(players.weight) as weight_sum',
-                             :joins => :players,
-                             :group => 'teams.id',
-                             :order => 'weight_sum DESC'
+    @points = Player.all :select => 'players.id as id, players.first_name, players.nickname, SUM(player_stats.points) as points_sum, SUM(player_stats.fouls) as fouls_sum',
+                             :joins => 'full outer join player_stats on players.id=player_stats.player_id',
+                             :group => 'players.id, players.first_name, players.nickname',
+                             :order => 'points_sum DESC',
+                             :limit => 5
 
-    @teams_height = Team.all :select => 'teams.name, SUM(players.height) as height_sum',
-                             :joins => :players,
-                             :group => 'teams.id',
-                             :order => 'height_sum DESC'
+    @fouls = Player.all :select => 'players.id as id, players.first_name, players.nickname, SUM(player_stats.points) as points_sum, SUM(player_stats.fouls) as fouls_sum',
+                             :joins => 'full outer join player_stats on players.id=player_stats.player_id',
+                             :group => 'players.id, players.first_name, players.nickname',
+                             :order => 'fouls_sum DESC',
+                             :limit => 5
+
     @stats = Game.stats
   end
 end
